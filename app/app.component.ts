@@ -4,15 +4,17 @@ export class Hero {
 	id: number;
 	name: string;
 }
-
 const HEROES: Hero [] = [ 
-	{id: 2, name: "Mr Roy" }, 
-	{id: 3, name: "Mr Raman"}, 
-	{id: 4, name: "Mr Guru"}, 
-	{id: 5, name: "Mr Sundar"}, 
-	{id: 6, name: "Mr Raj"}, 
-	{id: 7, name: "Mr Hero"}
+	{id: 1, name: "Mr Leonel Messi" },
+	{id: 2, name: "Mr Ronaldo CR7" }, 
+	{id: 3, name: "Mr CV Raman"}, 
+	{id: 4, name: "Mr Neymar Jr"}, 
+	{id: 5, name: "Mr Luis Suarez"}, 
+	{id: 6, name: "Mr Mesut Ozil"}, 
+	{id: 7, name: "Mr A.Iniesta"}
 ];
+
+
 
 @Component({
     selector: 'my-app',
@@ -20,10 +22,18 @@ const HEROES: Hero [] = [
   		<h1>{{title}}</h1>
   		<h3>My Heroes</h3>
   		<ul class= "heroes">
-  			<li *ngFor = "let hero of heroes">
+  			<li *ngFor = "let hero of heroes" (click) = "onSelect(hero)">
   				<span class="badge">{{hero.id}}</span> {{hero.name}}
   			</li>
   		</ul> 
+		<div *ngIf = selectedHero>
+  			<h2>{{selectedHero.name}} details!!</h2>
+  			<div><label>Id: </label>{{ selectedHero.id}}</div>
+  			<div>
+				<label>Name: </label>
+				<h4>{{selectedHero.name}}</h4>
+			</div>
+  		</div>
   		`,
   		styles: [`
 		  .selected {
@@ -76,8 +86,13 @@ const HEROES: Hero [] = [
 		`]
 })
 export class AppComponent {
-	title = 'Tour of Heroes';
+	title = 'Football Stars';
 	heroes =  HEROES;
+	selectedHero: Hero;
+	
+	onSelect(hero: Hero): void {
+		this.selectedHero = hero;
+	}
 }
 
 

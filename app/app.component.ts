@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
+import { Hero } from './hero';
 
-export class Hero {
-	id: number;
-	name: string;
-}
+
+// export class Hero {
+// 	id: number;
+// 	name: string;
+// }
 const HEROES: Hero [] = [ 
 	{id: 1, name: "Mr Leonel Messi" },
 	{id: 2, name: "Mr Ronaldo CR7" }, 
-	{id: 3, name: "Mr CV Raman"}, 
+	{id: 3, name: "Mr Ronaldinho"}, 
 	{id: 4, name: "Mr Neymar Jr"}, 
 	{id: 5, name: "Mr Luis Suarez"}, 
 	{id: 6, name: "Mr Mesut Ozil"}, 
@@ -20,20 +22,15 @@ const HEROES: Hero [] = [
     selector: 'my-app',
     template:`
   		<h1>{{title}}</h1>
-  		<h3>My Heroes</h3>
-  		<ul class= "heroes">
-  			<li *ngFor = "let hero of heroes" (click) = "onSelect(hero)">
-  				<span class="badge">{{hero.id}}</span> {{hero.name}}
-  			</li>
-  		</ul> 
-		<div *ngIf = selectedHero>
-  			<h2>{{selectedHero.name}} details!!</h2>
-  			<div><label>Id: </label>{{ selectedHero.id}}</div>
-  			<div>
-				<label>Name: </label>
-				<h4>{{selectedHero.name}}</h4>
-			</div>
-  		</div>
+		<h2>My Heroes</h2>
+		<ul class="heroes">
+			<li *ngFor="let hero of heroes"
+				[class.selected]="hero === selectedHero"
+				(click)="onSelect(hero)">
+				<span class="badge">{{hero.id}}</span> {{hero.name}}
+			</li>
+		</ul>
+		<my-hero-detail [hero]="selectedHero"></my-hero-detail>
   		`,
   		styles: [`
 		  .selected {
